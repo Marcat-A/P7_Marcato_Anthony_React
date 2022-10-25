@@ -49,3 +49,54 @@ header {
   top: 0;
   right: 0;
 }
+
+.searchedItems {
+  display: flex;
+  margin-top: 2vh;
+}
+
+.itemSearched {
+  display: flex;
+  background-color: #3282f7;
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5vw;
+}
+
+.itemSearched > i {
+  font-size: 20px;
+}
+
+.searchItems {
+  display: flex;
+  position: relative;
+  gap: 1vw;
+  margin-top: 2vh;
+}
+
+.searchItem {
+  padding: 20px;
+  color: white;
+  border-radius: 5px;
+}
+
+.searchItem > i {
+  font-style: 16px;
+  margin-left: 1vw;
+}
+
+.ingredients {
+  background-color: #3282f7;
+}
+
+.appareils {
+  background-color: #68d9a4;
+}
+
+.ustensiles {
+  background-color: #ed6454;
+}
