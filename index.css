@@ -115,8 +115,8 @@ header {
   align-items: center;
   justify-content: space-between;
   border-radius: 5px;
-  overflow: hidden;
-  min-height: 360px;
+  height: 360px;
+  max-height: 360px;
   height: 100%;
 }
 
@@ -179,4 +179,6 @@ header {
   width: 50%;
   font-family: "Roboto", sans-serif;
   font-size: 12px;
+  text-overflow: ellipsis;
+  max-height: 100px;
 }
