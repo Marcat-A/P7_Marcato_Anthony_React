@@ -1,7 +1,9 @@
 const menu = document.querySelector(".menu");
+// Get the part for including HTML
 
 menu.innerHTML = recipes
   .map((recipe) => {
+    //Map the array for display
     return `<div class="card">
     <div class="image"></div>
     <div class="description">
@@ -15,6 +17,7 @@ menu.innerHTML = recipes
         <div class="ingredientsUsed">
           ${recipe.ingredients
             .map((ingredient) => {
+              // Map the array in the ingredients
               return `<span class="ingredient">${ingredient.ingredient}<span>${
                 ingredient.quantity ? ": " + ingredient.quantity : ""
               }${ingredient.unit ? ingredient.unit : ""}</span></span>`;
