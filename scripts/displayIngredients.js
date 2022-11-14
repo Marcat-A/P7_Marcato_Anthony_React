@@ -39,5 +39,5 @@ function addIngredient(e) {
   ).innerHTML += `<button type="text" readonly value=${e} class="itemSearched">
   ${e}
   <i class="fa-regular fa-circle-xmark" onclick="this.parentElement.remove()"></i>
-</button>`;
+  </button>`;
 }

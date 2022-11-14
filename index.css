@@ -234,6 +234,10 @@ header {
   background-color: #3282f7;
 }
 
+.dropdownAppareils {
+  background-color: #68d9a4;
+}
+
 .ingredientInput {
   background-color: transparent;
   border: none;
