@@ -67,10 +67,13 @@ header {
   gap: 0.5vw;
   margin-right: 1rem;
   text-transform: capitalize;
+  outline: none;
+  border: none;
 }
 
 .itemSearched > i {
   font-size: 20px;
+  cursor: pointer;
 }
 
 .searchItems {

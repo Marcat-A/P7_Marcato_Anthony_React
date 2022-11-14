@@ -29,15 +29,15 @@ const div = document.querySelector(".dropdownIngredients");
 div.innerHTML = filteredIngredients
   .map(
     (ingredient) =>
-      `<input type="text" value="${ingredient}" onclick="addIngredient(this.value)" readonly  class="ingredientInput" />`
+      `<input type="text" value="${ingredient}" onclick="addIngredient(this.value), updateArr(this.value)" readonly  class="ingredientInput" />`
   )
   .join("");
 
 function addIngredient(e) {
   document.querySelector(
     ".searchedItems"
-  ).innerHTML += `<div class="itemSearched">
+  ).innerHTML += `<button type="text" readonly value=${e} class="itemSearched">
   ${e}
-  <i class="fa-regular fa-circle-xmark"></i>
-</div>`;
+  <i class="fa-regular fa-circle-xmark" onclick="this.parentElement.remove(), updateArr()"></i>
+</button>`;
 }
