@@ -65,6 +65,8 @@ header {
   align-items: center;
   justify-content: space-between;
   gap: 0.5vw;
+  margin-right: 1rem;
+  text-transform: capitalize;
 }
 
 .itemSearched > i {
@@ -79,14 +81,36 @@ header {
 }
 
 .searchItem {
+  position: relative;
+  min-width: 200px;
+}
+
+.ingredients,
+.appareils,
+.ustensiles {
   padding: 20px;
   color: white;
   border-radius: 5px;
+  border: none;
+  position: relative;
+  outline: none;
+  width: 100%;
+}
+
+.ingredients::placeholder,
+.ustensiles::placeholder,
+.appareils::placeholder {
+  color: white;
+  font-size: 16px;
 }
 
 .searchItem > i {
   font-style: 16px;
-  margin-left: 1vw;
+  top: 20px;
+  right: 15px;
+  position: absolute;
+  color: white;
+  cursor: pointer;
 }
 
 .ingredients {
@@ -181,4 +205,39 @@ header {
   font-size: 12px;
   text-overflow: ellipsis;
   max-height: 100px;
+}
+
+.dropdown {
+  display: none;
+  padding: 20px;
+  flex-direction: column;
+  border-radius: 5px;
+  color: white;
+  font-size: 18px;
+  text-transform: capitalize;
+  position: fixed;
+}
+
+.show {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.dropdown > span {
+  margin-bottom: 0.5vh;
+}
+
+.dropdownIngredients {
+  background-color: #3282f7;
+}
+
+.ingredientInput {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  margin: 2px;
+  text-transform: capitalize;
+  outline: none;
 }

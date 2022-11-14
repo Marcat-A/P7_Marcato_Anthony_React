@@ -31,27 +31,30 @@
         />
         <i class="fa-solid fa-magnifying-glass"></i>
       </div>
-      <div class="searchedItems">
-        <!-- <div class="itemSearched">
-          Coco
-          <i class="fa-regular fa-circle-xmark"></i>
-        </div> -->
-      </div>
+      <div class="searchedItems"></div>
       <div class="searchItems">
-        <div class="searchItem ingredients">
-          Ingredients <i class="fa-solid fa-chevron-down"></i>
+        <div class="searchItem">
+          <input type="text" placeholder="Ingredients" class="ingredients" />
+          <i class="fa-solid fa-chevron-down icon1"></i>
+          <div class="dropdownIngredients dropdown"></div>
         </div>
-        <div class="searchItem appareils">
-          Appareils <i class="fa-solid fa-chevron-down"></i>
+        <div class="searchItem">
+          <input type="text" placeholder="Appareils" class="appareils" />
+          <i class="fa-solid fa-chevron-down icon2"></i>
+          <div class="dropdownAppareils dropdown"></div>
         </div>
-        <div class="searchItem ustensiles">
-          Ustensiles <i class="fa-solid fa-chevron-down"></i>
+        <div class="searchItem">
+          <input type="text" placeholder="Ustensiles" class="ustensiles" />
+          <i class="fa-solid fa-chevron-down icon3"></i>
+          <div class="dropdownUstensiles dropdown"></div>
         </div>
       </div>
       <div class="menu"></div>
     </main>
   </body>
   <script src="assets/data/data.js"></script>
+  <script src="./index.js"></script>
   <script src="./scripts/index.js"></script>
   <script src="./scripts/filterData.js"></script>
+  <script src="./scripts/filterIngredients.js"></script>
 </html>
