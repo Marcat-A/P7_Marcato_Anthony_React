@@ -238,6 +238,10 @@ header {
   background-color: #68d9a4;
 }
 
+.dropdownUstensiles {
+  background-color: #ed6454;
+}
+
 .ingredientInput {
   background-color: transparent;
   border: none;
