@@ -7,6 +7,8 @@ icon2.addEventListener("click", displayDropdown);
 
 function displayDropdown() {
   dropdown2.classList.toggle("show");
+  dropdown.classList.remove("show");
+  dropdown3.classList.remove("show");
 }
 // Dropdown function
 
@@ -25,7 +27,7 @@ filteredAppareils.forEach((appareil) => {
 dropdown2.innerHTML = filteredAppliances
   .map(
     (appareil) =>
-      `<input type="text" value="${appareil}" onclick="addAppliance(this.value)" readonly  class="ingredientInput" />`
+      `<input type="text" value="${appareil}" onclick="addAppliance(this.value), addTag(this.value)" readonly  class="ingredientInput" />`
   )
   .join("");
 

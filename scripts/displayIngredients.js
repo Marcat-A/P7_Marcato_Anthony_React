@@ -7,6 +7,8 @@ icon.addEventListener("click", displayDropdown);
 
 function displayDropdown() {
   dropdown.classList.toggle("show");
+  dropdown2.classList.remove("show");
+  dropdown3.classList.remove("show");
 }
 // Dropdown function
 
@@ -29,7 +31,7 @@ const div = document.querySelector(".dropdownIngredients");
 div.innerHTML = filteredIngredients
   .map(
     (ingredient) =>
-      `<input type="text" value="${ingredient}" onclick="addIngredient(this.value)" readonly  class="ingredientInput" />`
+      `<input type="text" value="${ingredient}" onclick="addIngredient(this.value), addTag(this.value)" readonly  class="ingredientInput" />`
   )
   .join("");
 
