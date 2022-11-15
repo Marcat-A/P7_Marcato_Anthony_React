@@ -5,11 +5,15 @@ let multipleTagsArray = [];
 const searchBar = document.getElementById("search");
 
 const searchBarFilter = () => {
-  searchedArray = recipes.filter(
-    (el) =>
-      el.name.toLowerCase().includes(searchBar.value) ||
-      el.description.toLowerCase().includes(searchBar.value)
-  );
+  if (searchBar.value.length > 2) {
+    searchedArray = recipes.filter(
+      (el) =>
+        el.name.toLowerCase().includes(searchBar.value) ||
+        el.description.toLowerCase().includes(searchBar.value)
+    );
+  } else {
+    searchedArray = [];
+  }
 };
 
 const tagsFilter = (tag) => {
