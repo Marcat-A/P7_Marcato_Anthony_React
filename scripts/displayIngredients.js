@@ -38,8 +38,8 @@ div.innerHTML = filteredIngredients
 function addIngredient(e) {
   document.querySelector(
     ".searchedItems"
-  ).innerHTML += `<button type="text" readonly value=${e} class="itemSearched">
+  ).innerHTML += `<button type="text" readonly value=${taggedArray.length} class="itemSearched">
   ${e}
-  <i class="fa-regular fa-circle-xmark" onclick="this.parentElement.remove()"></i>
+  <i class="fa-regular fa-circle-xmark" onclick="removeTag(this.parentElement.value), this.parentElement.remove()"></i>
   </button>`;
 }

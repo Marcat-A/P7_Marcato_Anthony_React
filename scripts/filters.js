@@ -2,6 +2,7 @@ let searchedArray = [];
 let taggedArray = [];
 let filteredTagArray = [];
 let multipleTagsArray = [];
+let finalArray = [];
 const searchBar = document.getElementById("search");
 
 const searchBarFilter = () => {
@@ -11,8 +12,16 @@ const searchBarFilter = () => {
         el.name.toLowerCase().includes(searchBar.value) ||
         el.description.toLowerCase().includes(searchBar.value)
     );
-  } else {
-    searchedArray = [];
+    finalArray = searchedArray.filter((el) => {
+      return multipleTagsArray.length > 0
+        ? multipleTagsArray.some((f) => {
+            return f.id === el.id;
+          })
+        : filteredTagArray.some((f) => {
+            return f.id === el.id;
+          });
+    });
+    display();
   }
 };
 
@@ -23,9 +32,14 @@ const tagsFilter = (tag) => {
         return r.ingredient.toLowerCase().includes(tag);
       });
     });
+    finalArray = searchedArray.filter((el) => {
+      return filteredTagArray.some((f) => {
+        return f.id === el.id;
+      });
+    });
+    display();
   } else {
     for (let i = 0; i < taggedArray.length; i++) {
-      console.log(taggedArray[i].toLowerCase());
       multipleTagsArray = filteredTagArray.filter((filter) => {
         return filter.ingredients.some((f) => {
           return f.ingredient
@@ -34,6 +48,12 @@ const tagsFilter = (tag) => {
         });
       });
     }
+    finalArray = searchedArray.filter((el) => {
+      return multipleTagsArray.some((f) => {
+        return f.id === el.id;
+      });
+    });
+    display();
   }
 };
 searchBar.addEventListener("input", searchBarFilter);
@@ -46,4 +66,17 @@ const addTag = () => {
       tagsFilter(tag.innerText.toLowerCase());
     }
   });
+};
+
+const removeTag = (key) => {
+  taggedArray.splice(key, 1);
+  const tags = document.querySelectorAll(".itemSearched");
+  tags.forEach((tag) => {
+    tagsFilter(tag.innerText.toLowerCase());
+  });
+  if (tags.length === 1) {
+    filteredTagArray = [];
+    multipleTagsArray = [];
+  }
+  display();
 };
