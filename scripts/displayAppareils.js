@@ -27,7 +27,7 @@ filteredAppareils.forEach((appareil) => {
 dropdown2.innerHTML = filteredAppliances
   .map(
     (appareil) =>
-      `<input type="text" value="${appareil}" onclick="addAppliance(this.value), addTag(this.value), displayDropdown2()" readonly  class="ingredientInput" />`
+      `<input type="text" value="${appareil}" onclick="addAppliance(this.value), addTag(appareils, this.value), displayDropdown2()" readonly  class="ingredientInput" />`
   )
   .join("");
 

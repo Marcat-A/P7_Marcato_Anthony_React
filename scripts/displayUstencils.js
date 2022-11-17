@@ -29,7 +29,7 @@ for (let i = 0; i < filteredObjets.length; i++) {
 dropdown3.innerHTML = filteredUstencils
   .map(
     (ingredient) =>
-      `<input type="text" value="${ingredient}" onclick="addUstencil(this.value), addTag(this.value), displayDropdown3()" readonly  class="ingredientInput" />`
+      `<input type="text" value="${ingredient}" onclick="addUstencil(this.value), addTag(ustensiles, this.value), displayDropdown3()" readonly  class="ingredientInput" />`
   )
   .join("");
 

@@ -31,15 +31,15 @@ const div = document.querySelector(".dropdownIngredients");
 div.innerHTML = filteredIngredients
   .map(
     (ingredient) =>
-      `<input type="text" value="${ingredient}" onclick="addIngredient(this.value), addTag(this.value), displayDropdown()" readonly  class="ingredientInput" />`
+      `<input type="text" value="${ingredient}" onclick="addIngredient(this.value), addTag(ingredients, this.value), displayDropdown()" readonly  class="ingredientInput" />`
   )
   .join("");
 
 function addIngredient(e) {
   document.querySelector(
     ".searchedItems"
-  ).innerHTML += `<button type="text" readonly value=${taggedArray.length} class="itemSearched">
+  ).innerHTML += `<button type="text" readonly value=${ingredients[0].length} class="itemSearched">
   ${e}
-  <i class="fa-regular fa-circle-xmark" onclick="removeTag(this.parentElement.value), this.parentElement.remove()"></i>
+  <i class="fa-regular fa-circle-xmark" onclick="removeTag(this.parentElement.value, ingredients), this.parentElement.remove()"></i>
   </button>`;
 }

@@ -1,9 +1,19 @@
 let searchedArray = [];
-let taggedArray = [];
+let taggedArray = [{ ingredients: [], appareils: [], ustensiles: [] }];
 let filteredTagArray = [];
 let multipleTagsArray = [];
 let finalArray = [];
 const searchBar = document.getElementById("search");
+
+const ingredients = taggedArray.map((ingredient) => {
+  return ingredient.ingredients;
+});
+const appareils = taggedArray.map((appareil) => {
+  return appareil.appareils;
+});
+const ustensiles = taggedArray.map((ustensile) => {
+  return ustensile.ustensiles;
+});
 
 const searchBarFilter = () => {
   if (searchBar.value.length > 2) {
@@ -69,18 +79,23 @@ const tagsFilter = (tag) => {
 };
 searchBar.addEventListener("input", searchBarFilter);
 
-const addTag = () => {
-  const tags = document.querySelectorAll(".itemSearched");
-  tags.forEach((tag) => {
-    if (!taggedArray.includes(tag.innerText.toLowerCase())) {
-      taggedArray.push(tag.innerText.toLowerCase());
-      tagsFilter(tag.innerText.toLowerCase());
-    }
-  });
+const addTag = (array, name) => {
+  if (!array[0].includes(name)) {
+    array[0].push(name.toLowerCase());
+    console.log(taggedArray, ingredients);
+  }
+  //   const tags = document.querySelectorAll(".itemSearched");
+  //   tags.forEach((tag) => {
+  //     if (!taggedArray.includes(tag.innerText.toLowerCase())) {
+  //       taggedArray.push(tag.innerText.toLowerCase());
+  //       tagsFilter(tag.innerText.toLowerCase());
+  //     }
+  //   });
 };
 
-const removeTag = (key) => {
-  taggedArray.splice(key, 1);
+const removeTag = (key, array) => {
+  array[0].splice(key, 1);
+  console.log(array);
   const tags = document.querySelectorAll(".itemSearched");
   tags.forEach((tag) => {
     tagsFilter(tag.innerText.toLowerCase());
