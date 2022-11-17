@@ -3,9 +3,9 @@ const dropdown3 = document.querySelector(".dropdownUstensiles");
 const icon3 = document.querySelector(".icon3");
 // Icon
 
-icon3.addEventListener("click", displayDropdown);
+icon3.addEventListener("click", displayDropdown3);
 
-function displayDropdown() {
+function displayDropdown3() {
   dropdown3.classList.toggle("show");
   dropdown2.classList.remove("show");
   dropdown.classList.remove("show");
@@ -29,7 +29,7 @@ for (let i = 0; i < filteredObjets.length; i++) {
 dropdown3.innerHTML = filteredUstencils
   .map(
     (ingredient) =>
-      `<input type="text" value="${ingredient}" onclick="addUstencil(this.value), addTag(this.value)" readonly  class="ingredientInput" />`
+      `<input type="text" value="${ingredient}" onclick="addUstencil(this.value), addTag(this.value), displayDropdown3()" readonly  class="ingredientInput" />`
   )
   .join("");
 

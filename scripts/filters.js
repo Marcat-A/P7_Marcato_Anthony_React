@@ -47,6 +47,17 @@ const tagsFilter = (tag) => {
             .includes(taggedArray[i].toLowerCase());
         });
       });
+      //   filteredTagArray.filter((filter) => {
+      //     return filter.ustensils.some((f) => {
+      //       return multipleTagsArray.push(
+      //         f.toLowerCase().includes(taggedArray[i].toLowerCase())
+      //       );
+      //     });
+      //   });
+      //   console.log(filteredTagArray);
+      //   multipleTagsArray.push(
+      //     filteredTagArray[i].appliance.toLowerCase() == tag
+      //   );
     }
     finalArray = searchedArray.filter((el) => {
       return multipleTagsArray.some((f) => {
@@ -76,6 +87,9 @@ const removeTag = (key) => {
   });
   if (tags.length === 1) {
     filteredTagArray = [];
+    multipleTagsArray = [];
+  }
+  if (tags.length === 2) {
     multipleTagsArray = [];
   }
   display();

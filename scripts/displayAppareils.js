@@ -3,9 +3,9 @@ const dropdown2 = document.querySelector(".dropdownAppareils");
 const icon2 = document.querySelector(".icon2");
 // Icon
 
-icon2.addEventListener("click", displayDropdown);
+icon2.addEventListener("click", displayDropdown2);
 
-function displayDropdown() {
+function displayDropdown2() {
   dropdown2.classList.toggle("show");
   dropdown.classList.remove("show");
   dropdown3.classList.remove("show");
@@ -27,7 +27,7 @@ filteredAppareils.forEach((appareil) => {
 dropdown2.innerHTML = filteredAppliances
   .map(
     (appareil) =>
-      `<input type="text" value="${appareil}" onclick="addAppliance(this.value), addTag(this.value)" readonly  class="ingredientInput" />`
+      `<input type="text" value="${appareil}" onclick="addAppliance(this.value), addTag(this.value), displayDropdown2()" readonly  class="ingredientInput" />`
   )
   .join("");
 

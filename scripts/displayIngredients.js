@@ -31,7 +31,7 @@ const div = document.querySelector(".dropdownIngredients");
 div.innerHTML = filteredIngredients
   .map(
     (ingredient) =>
-      `<input type="text" value="${ingredient}" onclick="addIngredient(this.value), addTag(this.value)" readonly  class="ingredientInput" />`
+      `<input type="text" value="${ingredient}" onclick="addIngredient(this.value), addTag(this.value), displayDropdown()" readonly  class="ingredientInput" />`
   )
   .join("");
 
