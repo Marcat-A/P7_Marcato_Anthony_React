@@ -80,7 +80,15 @@ const tagsFilter = (tag) => {
 searchBar.addEventListener("input", searchBarFilter);
 
 const addTag = (array, name) => {
-  if (!array[0].includes(name)) {
+  if (array === ingredients && !array[0].includes(name.toLowerCase())) {
+    addIngredient(name.toLowerCase());
+  } else if (array === appareils && !array[0].includes(name.toLowerCase())) {
+    addAppliance(name.toLowerCase());
+  } else if (array === ustensiles && !array[0].includes(name.toLowerCase())) {
+    addUstencil(name.toLowerCase());
+    console.log(array, name, array[0].includes(name.toLowerCase()));
+  }
+  if (!array[0].includes(name.toLowerCase())) {
     array[0].push(name.toLowerCase());
     console.log(taggedArray, ingredients);
   }

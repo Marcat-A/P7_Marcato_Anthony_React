@@ -27,15 +27,15 @@ filteredAppareils.forEach((appareil) => {
 dropdown2.innerHTML = filteredAppliances
   .map(
     (appareil) =>
-      `<input type="text" value="${appareil}" onclick="addAppliance(this.value), addTag(appareils, this.value), displayDropdown2()" readonly  class="ingredientInput" />`
+      `<input type="text" value="${appareil}" onclick="addTag(appareils, this.value), displayDropdown2()" readonly  class="ingredientInput" />`
   )
   .join("");
 
 function addAppliance(e) {
   document.querySelector(
     ".searchedItems"
-  ).innerHTML += `<button type="text" readonly value=${e} class="itemSearched dropdownAppareils">
+  ).innerHTML += `<button type="text" readonly value=${appareils[0].length} class="itemSearched dropdownAppareils">
   ${e}
-  <i class="fa-regular fa-circle-xmark" onclick="this.parentElement.remove()"></i>
+  <i class="fa-regular fa-circle-xmark" onclick="removeTag(this.parentElement.value, appareils), this.parentElement.remove()"></i>
   </button>`;
 }

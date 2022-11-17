@@ -28,16 +28,16 @@ for (let i = 0; i < filteredObjets.length; i++) {
 
 dropdown3.innerHTML = filteredUstencils
   .map(
-    (ingredient) =>
-      `<input type="text" value="${ingredient}" onclick="addUstencil(this.value), addTag(ustensiles, this.value), displayDropdown3()" readonly  class="ingredientInput" />`
+    (ustensil) =>
+      `<input type="text" value="${ustensil}" onclick="addTag(ustensiles, this.value), displayDropdown3()" readonly  class="ingredientInput" />`
   )
   .join("");
 
 function addUstencil(e) {
   document.querySelector(
     ".searchedItems"
-  ).innerHTML += `<button type="text" readonly value=${e} class="itemSearched dropdownUstensiles">
+  ).innerHTML += `<button type="text" readonly value=${ustensiles[0].length} class="itemSearched dropdownUstensiles">
   ${e}
-  <i class="fa-regular fa-circle-xmark" onclick="this.parentElement.remove()"></i>
+  <i class="fa-regular fa-circle-xmark" onclick="removeTag(this.parentElement.value, ustensiles), this.parentElement.remove()"></i>
   </button>`;
 }
