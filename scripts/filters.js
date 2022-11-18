@@ -35,18 +35,30 @@ const searchBarFilter = () => {
   }
 };
 
-const tagsFilter = (tag) => {
+const tagsFilter = (tag, array) => {
   if (taggedArray.length === 1) {
-    filteredTagArray = recipes.filter((recipe) => {
-      return recipe.ingredients.some((r) => {
-        return r.ingredient.toLowerCase().includes(tag);
+    if (array === ingredients) {
+      filteredTagArray = recipes.filter((recipe) => {
+        return recipe.ingredients.some((r) => {
+          return r.ingredient.toLowerCase().includes(tag.toLowerCase());
+        });
       });
-    });
-    finalArray = searchedArray.filter((el) => {
-      return filteredTagArray.some((f) => {
-        return f.id === el.id;
+      finalArray = searchedArray.filter((el) => {
+        return filteredTagArray.some((f) => {
+          return f.id === el.id;
+        });
       });
-    });
+    } else if (array === appareils) {
+      filteredTagArray = recipes.filter((recipe) => {
+        return recipe.appliance.toLowerCase().includes(tag.toLowerCase());
+      });
+    } else if (array === ustensiles) {
+      filteredTagArray = recipes.filter((recipe) => {
+        return recipe.ustensils.some((r) => {
+          return r.toLowerCase().includes(tag.toLowerCase());
+        });
+      });
+    }
     display();
   } else {
     for (let i = 0; i < taggedArray.length; i++) {
@@ -82,28 +94,21 @@ searchBar.addEventListener("input", searchBarFilter);
 const addTag = (array, name) => {
   if (array === ingredients && !array[0].includes(name.toLowerCase())) {
     addIngredient(name.toLowerCase());
+    tagsFilter(name, array);
   } else if (array === appareils && !array[0].includes(name.toLowerCase())) {
     addAppliance(name.toLowerCase());
+    tagsFilter(name, array);
   } else if (array === ustensiles && !array[0].includes(name.toLowerCase())) {
     addUstencil(name.toLowerCase());
-    console.log(array, name, array[0].includes(name.toLowerCase()));
+    tagsFilter(name, array);
   }
   if (!array[0].includes(name.toLowerCase())) {
     array[0].push(name.toLowerCase());
-    console.log(taggedArray, ingredients);
   }
-  //   const tags = document.querySelectorAll(".itemSearched");
-  //   tags.forEach((tag) => {
-  //     if (!taggedArray.includes(tag.innerText.toLowerCase())) {
-  //       taggedArray.push(tag.innerText.toLowerCase());
-  //       tagsFilter(tag.innerText.toLowerCase());
-  //     }
-  //   });
 };
 
 const removeTag = (key, array) => {
   array[0].splice(key, 1);
-  console.log(array);
   const tags = document.querySelectorAll(".itemSearched");
   tags.forEach((tag) => {
     tagsFilter(tag.innerText.toLowerCase());
