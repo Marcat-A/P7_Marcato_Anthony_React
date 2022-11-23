@@ -1,7 +1,8 @@
 const menu = document.querySelector(".menu");
 
+let finalArray = [];
 const displayContent = (data) => {
-  if (!data) {
+  if (data.length == 0) {
     menu.innerHTML = recipes
       .map((recipe) => {
         return `<div class="card">
@@ -72,36 +73,4 @@ const displayContent = (data) => {
   }
 };
 
-const display = () => {
-  if (searchedArray.length > 0 && filteredTagArray.length < 1) {
-    displayContent(searchedArray);
-  } else if (
-    searchedArray.length < 1 &&
-    filteredTagArray.length > 0 &&
-    multipleTagsArray.length < 1
-  ) {
-    displayContent(filteredTagArray);
-  } else if (
-    searchedArray.length < 1 &&
-    filteredTagArray.length > 0 &&
-    multipleTagsArray.length > 0
-  ) {
-    displayContent(multipleTagsArray);
-  } else if (
-    searchedArray.length > 0 &&
-    filteredTagArray.length > 0 &&
-    multipleTagsArray.length < 1
-  ) {
-    displayContent(finalArray);
-  } else if (
-    searchedArray.length > 0 &&
-    filteredTagArray.length > 0 &&
-    multipleTagsArray.length > 0
-  ) {
-    displayContent(finalArray);
-  } else {
-    displayContent("");
-  }
-};
-
-displayContent();
+displayContent("");

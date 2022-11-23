@@ -25,19 +25,22 @@ for (let i = 0; i < filteredObjets.length; i++) {
     }
   });
 }
+const ust = taggedArray.map((ustensil) => {
+  return ustensil.ustensiles;
+});
 
 dropdown3.innerHTML = filteredUstencils
   .map(
     (ustensil) =>
-      `<input type="text" value="${ustensil}" onclick="addTag(ustensiles, this.value), displayDropdown3()" readonly  class="ingredientInput" />`
+      `<input type="text" value="${ustensil}" onclick="addTag(ust, this.value), displayDropdown3()" readonly  class="ingredientInput" />`
   )
   .join("");
 
 function addUstencil(e) {
   document.querySelector(
     ".searchedItems"
-  ).innerHTML += `<button type="text" readonly value=${ustensiles[0].length} class="itemSearched dropdownUstensiles">
+  ).innerHTML += `<button type="text" readonly value=${ust[0].length} class="itemSearched dropdownUstensiles">
   ${e}
-  <i class="fa-regular fa-circle-xmark" onclick="removeTag(this.parentElement.value, ustensiles), this.parentElement.remove()"></i>
+  <i class="fa-regular fa-circle-xmark" onclick="removeTag(this.parentElement.value, ust), this.parentElement.remove()"></i>
   </button>`;
 }

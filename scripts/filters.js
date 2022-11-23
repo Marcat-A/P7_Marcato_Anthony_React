@@ -1,124 +1,113 @@
-let searchedArray = [];
+let searchedArray = recipes;
 let taggedArray = [{ ingredients: [], appareils: [], ustensiles: [] }];
+
+let ingredientsArray = [];
+
+recipes.forEach((recipe) => {
+  recipe.ingredients.forEach((ingredient) => {
+    if (!ingredientsArray.includes(ingredient.ingredient.toLowerCase())) {
+      ingredientsArray.push(ingredient.ingredient.toLowerCase());
+    }
+  });
+});
+
+let appareils = [];
+let ustensiles = recipes.map((recipe) => {
+  return recipe.ustensils;
+});
 let filteredTagArray = [];
 let multipleTagsArray = [];
-let finalArray = [];
+
+console.log(ingredientsArray);
+
 const searchBar = document.getElementById("search");
 
-const ingredients = taggedArray.map((ingredient) => {
-  return ingredient.ingredients;
-});
-const appareils = taggedArray.map((appareil) => {
-  return appareil.appareils;
-});
-const ustensiles = taggedArray.map((ustensile) => {
-  return ustensile.ustensiles;
-});
-
 const searchBarFilter = () => {
-  if (searchBar.value.length > 2) {
+  const tags = document.querySelectorAll(".itemSearched");
+  if (searchBar.value.length > 2 && searchedArray.length == 0) {
+    menu.innerHTML = "";
+  } else if (searchBar.value.length == 1) {
+    return false;
+  } else if (
+    searchBar.value.length > 2 &&
+    searchedArray.length > 1 &&
+    finalArray.length > 1
+  ) {
+    searchedArray = finalArray.filter(
+      (el) =>
+        el.name.toLowerCase().includes(searchBar.value) ||
+        el.description.toLowerCase().includes(searchBar.value)
+    );
+    displayContent(searchedArray);
+  } else if (searchBar.value.length > 2 && searchedArray.length > 1) {
     searchedArray = recipes.filter(
       (el) =>
         el.name.toLowerCase().includes(searchBar.value) ||
         el.description.toLowerCase().includes(searchBar.value)
     );
-    finalArray = searchedArray.filter((el) => {
-      return multipleTagsArray.length > 0
-        ? multipleTagsArray.some((f) => {
-            return f.id === el.id;
-          })
-        : filteredTagArray.some((f) => {
-            return f.id === el.id;
-          });
-    });
-    display();
+    displayContent(searchedArray);
+  } else if (searchBar.value.length < 3 && tags.length == 0) {
+    displayContent("");
+    searchedArray = recipes;
+    finalArray = [];
+  } else if (searchBar.value.length == 0 && tags.length > 0) {
+    displayContent(finalArray);
   }
 };
 
-const tagsFilter = (tag, array) => {
-  if (taggedArray.length === 1) {
-    if (array === ingredients) {
-      filteredTagArray = recipes.filter((recipe) => {
+const tagsFilter = (array) => {
+  if (array === ing) {
+    array.forEach((tag) => {
+      finalArray = searchedArray.filter((recipe) => {
         return recipe.ingredients.some((r) => {
-          return r.ingredient.toLowerCase().includes(tag.toLowerCase());
+          return r.ingredient.toLowerCase().includes(tag);
         });
-      });
-      finalArray = searchedArray.filter((el) => {
-        return filteredTagArray.some((f) => {
-          return f.id === el.id;
-        });
-      });
-    } else if (array === appareils) {
-      filteredTagArray = recipes.filter((recipe) => {
-        return recipe.appliance.toLowerCase().includes(tag.toLowerCase());
-      });
-    } else if (array === ustensiles) {
-      filteredTagArray = recipes.filter((recipe) => {
-        return recipe.ustensils.some((r) => {
-          return r.toLowerCase().includes(tag.toLowerCase());
-        });
-      });
-    }
-    display();
-  } else {
-    for (let i = 0; i < taggedArray.length; i++) {
-      multipleTagsArray = filteredTagArray.filter((filter) => {
-        return filter.ingredients.some((f) => {
-          return f.ingredient
-            .toLowerCase()
-            .includes(taggedArray[i].toLowerCase());
-        });
-      });
-      //   filteredTagArray.filter((filter) => {
-      //     return filter.ustensils.some((f) => {
-      //       return multipleTagsArray.push(
-      //         f.toLowerCase().includes(taggedArray[i].toLowerCase())
-      //       );
-      //     });
-      //   });
-      //   console.log(filteredTagArray);
-      //   multipleTagsArray.push(
-      //     filteredTagArray[i].appliance.toLowerCase() == tag
-      //   );
-    }
-    finalArray = searchedArray.filter((el) => {
-      return multipleTagsArray.some((f) => {
-        return f.id === el.id;
       });
     });
-    display();
+  } else if (array === app) {
+    array.forEach((tag) => {
+      finalArray = searchedArray.filter((recipe) => {
+        return recipe.appliance.toLowerCase().includes(tag);
+      });
+    });
+  } else if (array === ust) {
+    array.forEach((tag) => {
+      finalArray = searchedArray.filter((recipe) => {
+        return recipe.ustensils.some((r) => {
+          return r.toLowerCase() == tag;
+        });
+      });
+    });
   }
+  displayContent(finalArray);
 };
 searchBar.addEventListener("input", searchBarFilter);
 
 const addTag = (array, name) => {
-  if (array === ingredients && !array[0].includes(name.toLowerCase())) {
+  if (array === ing && !array[0].includes(name.toLowerCase())) {
     addIngredient(name.toLowerCase());
-    tagsFilter(name, array);
-  } else if (array === appareils && !array[0].includes(name.toLowerCase())) {
+  } else if (array === app && !array[0].includes(name.toLowerCase())) {
     addAppliance(name.toLowerCase());
-    tagsFilter(name, array);
-  } else if (array === ustensiles && !array[0].includes(name.toLowerCase())) {
+  } else if (array === ust && !array[0].includes(name.toLowerCase())) {
     addUstencil(name.toLowerCase());
-    tagsFilter(name, array);
   }
   if (!array[0].includes(name.toLowerCase())) {
     array[0].push(name.toLowerCase());
+    tagsFilter(array);
   }
 };
 
 const removeTag = (key, array) => {
-  array[0].splice(key, 1);
   const tags = document.querySelectorAll(".itemSearched");
-  tags.forEach((tag) => {
-    tagsFilter(tag.innerText.toLowerCase());
-  });
-  if (tags.length === 1) {
-    filteredTagArray = [];
-    multipleTagsArray = [];
+  console.log(tags.length, searchBar.value.length);
+  if (tags.length === 1 && searchBar.value.length < 1) {
+    displayContent("");
+  } else if (tags.length === 1 && searchBar.value.length > 2) {
+    finalArray = [];
+    searchedArray = recipes;
+    searchBarFilter();
+    displayContent(searchedArray);
   }
-  if (tags.length === 2) {
-    multipleTagsArray = [];
-  }
-  display();
+  array[0].splice(key, 1);
+  tagsFilter(array);
 };

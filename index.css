@@ -217,13 +217,13 @@ header {
   border-radius: 5px;
   color: white;
   font-size: 18px;
-  text-transform: capitalize;
-  position: fixed;
+  position: absolute;
 }
 
 .show {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  margin-right: 0.5rem;
 }
 
 .dropdown > span {
@@ -249,6 +249,7 @@ header {
   color: white;
   font-size: 18px;
   margin: 2px;
-  text-transform: capitalize;
   outline: none;
+  text-transform: capitalize;
+  text-overflow: ellipsis;
 }

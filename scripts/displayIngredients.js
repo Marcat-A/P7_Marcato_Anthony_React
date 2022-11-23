@@ -16,30 +16,34 @@ const filteredRecipes = recipes.map((recipe) => {
   return recipe.ingredients;
 });
 
-const filteredIngredients = [];
+// const filteredIngredients = [];
 
-for (let i = 0; i < filteredRecipes[i].length; i++) {
-  filteredRecipes[i].filter((ingredient) => {
-    if (!filteredIngredients.includes(ingredient.ingredient.toLowerCase())) {
-      filteredIngredients.push(ingredient.ingredient.toLowerCase());
-    }
-  });
-}
+// for (let i = 0; i < filteredRecipes[i].length; i++) {
+//   filteredRecipes[i].filter((ingredient) => {
+//     if (!filteredIngredients.includes(ingredient.ingredient.toLowerCase())) {
+//       filteredIngredients.push(ingredient.ingredient.toLowerCase());
+//     }
+//   });
+// }
+
+const ing = taggedArray.map((ingredient) => {
+  return ingredient.ingredients;
+});
 
 const div = document.querySelector(".dropdownIngredients");
 
-div.innerHTML = filteredIngredients
+div.innerHTML = ingredientsArray
   .map(
     (ingredient) =>
-      `<input type="text" value="${ingredient}" onclick="addTag(ingredients, this.value), displayDropdown()" readonly  class="ingredientInput" />`
+      `<input type="text" value="${ingredient}" onclick="addTag(ing, this.value), displayDropdown()" readonly  class="ingredientInput" />`
   )
   .join("");
 
 function addIngredient(e) {
   document.querySelector(
     ".searchedItems"
-  ).innerHTML += `<button type="text" readonly value=${ingredients[0].length} class="itemSearched">
+  ).innerHTML += `<button type="text" readonly value=${ing[0].length} class="itemSearched">
   ${e}
-  <i class="fa-regular fa-circle-xmark" onclick="removeTag(this.parentElement.value, ingredients), this.parentElement.remove()"></i>
+  <i class="fa-regular fa-circle-xmark" onclick="removeTag(this.parentElement.value, ing), this.parentElement.remove()"></i>
   </button>`;
 }
