@@ -16,15 +16,15 @@ const filteredRecipes = recipes.map((recipe) => {
   return recipe.ingredients;
 });
 
-// const filteredIngredients = [];
+const filteredIngredients = [];
 
-// for (let i = 0; i < filteredRecipes[i].length; i++) {
-//   filteredRecipes[i].filter((ingredient) => {
-//     if (!filteredIngredients.includes(ingredient.ingredient.toLowerCase())) {
-//       filteredIngredients.push(ingredient.ingredient.toLowerCase());
-//     }
-//   });
-// }
+for (let i = 0; i < filteredRecipes[i].length; i++) {
+  filteredRecipes[i].filter((ingredient) => {
+    if (!filteredIngredients.includes(ingredient.ingredient.toLowerCase())) {
+      filteredIngredients.push(ingredient.ingredient.toLowerCase());
+    }
+  });
+}
 
 const ing = taggedArray.map((ingredient) => {
   return ingredient.ingredients;
@@ -32,7 +32,7 @@ const ing = taggedArray.map((ingredient) => {
 
 const div = document.querySelector(".dropdownIngredients");
 
-div.innerHTML = ingredientsArray
+div.innerHTML = filteredIngredients
   .map(
     (ingredient) =>
       `<input type="text" value="${ingredient}" onclick="addTag(ing, this.value), displayDropdown()" readonly  class="ingredientInput" />`

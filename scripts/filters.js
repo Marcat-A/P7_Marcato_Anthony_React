@@ -1,6 +1,8 @@
 let searchedArray = recipes;
 let taggedArray = [{ ingredients: [], appareils: [], ustensiles: [] }];
 
+let newArray = [];
+
 let ingredientsArray = [];
 
 recipes.forEach((recipe) => {
@@ -18,12 +20,11 @@ let ustensiles = recipes.map((recipe) => {
 let filteredTagArray = [];
 let multipleTagsArray = [];
 
-console.log(ingredientsArray);
-
 const searchBar = document.getElementById("search");
 
 const searchBarFilter = () => {
   const tags = document.querySelectorAll(".itemSearched");
+  console.log(searchedArray.length);
   if (searchBar.value.length > 2 && searchedArray.length == 0) {
     menu.innerHTML = "";
   } else if (searchBar.value.length == 1) {
@@ -47,7 +48,7 @@ const searchBarFilter = () => {
     );
     displayContent(searchedArray);
   } else if (searchBar.value.length < 3 && tags.length == 0) {
-    displayContent("");
+    displayContent();
     searchedArray = recipes;
     finalArray = [];
   } else if (searchBar.value.length == 0 && tags.length > 0) {
@@ -56,30 +57,59 @@ const searchBarFilter = () => {
 };
 
 const tagsFilter = (array) => {
-  if (array === ing) {
-    array.forEach((tag) => {
-      finalArray = searchedArray.filter((recipe) => {
-        return recipe.ingredients.some((r) => {
-          return r.ingredient.toLowerCase().includes(tag);
+  const tags = document.querySelectorAll(".itemSearched");
+  if (tags.length > 1) {
+    if (array === ing) {
+      for (i = 0; i < array[0].length; i++) {
+        console.log(array[0][i], newArray);
+        newArray = finalArray.filter((recipe) => {
+          return recipe.ingredients.some((r) => {
+            return r.ingredient.toLowerCase().includes(array[0][i]);
+          });
+        });
+      }
+    } else if (array === app) {
+      for (i = 0; i < array[0].length; i++) {
+        newArray = finalArray.filter((recipe) => {
+          return recipe.appliance.toLowerCase().includes(array[0][i]);
+        });
+      }
+    } else if (array === ust) {
+      array.forEach((tag) => {
+        newArray = finalArray.filter((recipe) => {
+          return recipe.ustensils.some((r) => {
+            return r.toLowerCase() == tag;
+          });
         });
       });
-    });
-  } else if (array === app) {
-    array.forEach((tag) => {
-      finalArray = searchedArray.filter((recipe) => {
-        return recipe.appliance.toLowerCase().includes(tag);
-      });
-    });
-  } else if (array === ust) {
-    array.forEach((tag) => {
-      finalArray = searchedArray.filter((recipe) => {
-        return recipe.ustensils.some((r) => {
-          return r.toLowerCase() == tag;
+    }
+    displayContent(newArray);
+  } else {
+    if (array === ing) {
+      array[0].forEach((tag) => {
+        finalArray = searchedArray.filter((recipe) => {
+          return recipe.ingredients.some((r) => {
+            return r.ingredient.toLowerCase().includes(tag);
+          });
         });
       });
-    });
+    } else if (array === app) {
+      array[0].forEach((tag) => {
+        finalArray = searchedArray.filter((recipe) => {
+          return recipe.appliance.toLowerCase().includes(tag);
+        });
+      });
+    } else if (array === ust) {
+      array[0].forEach((tag) => {
+        finalArray = searchedArray.filter((recipe) => {
+          return recipe.ustensils.some((r) => {
+            return r.toLowerCase() == tag;
+          });
+        });
+      });
+    }
+    displayContent(finalArray);
   }
-  displayContent(finalArray);
 };
 searchBar.addEventListener("input", searchBarFilter);
 
@@ -99,15 +129,19 @@ const addTag = (array, name) => {
 
 const removeTag = (key, array) => {
   const tags = document.querySelectorAll(".itemSearched");
-  console.log(tags.length, searchBar.value.length);
   if (tags.length === 1 && searchBar.value.length < 1) {
-    displayContent("");
+    array[0].splice(key, 1);
+    finalArray = [];
+    searchedArray = recipes;
+    displayContent();
   } else if (tags.length === 1 && searchBar.value.length > 2) {
+    array[0].splice(key, 1);
     finalArray = [];
     searchedArray = recipes;
     searchBarFilter();
     displayContent(searchedArray);
+  } else {
+    array[0].splice(key, 1);
+    tagsFilter(array);
   }
-  array[0].splice(key, 1);
-  tagsFilter(array);
 };

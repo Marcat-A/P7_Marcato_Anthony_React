@@ -2,7 +2,7 @@ const menu = document.querySelector(".menu");
 
 let finalArray = [];
 const displayContent = (data) => {
-  if (data.length == 0) {
+  if (!data) {
     menu.innerHTML = recipes
       .map((recipe) => {
         return `<div class="card">
