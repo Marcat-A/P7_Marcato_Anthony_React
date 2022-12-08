@@ -1,147 +1,141 @@
 let searchedArray = recipes;
+let arrayOfTags = recipes;
+// Initialise the array
+
 let taggedArray = [{ ingredients: [], appareils: [], ustensiles: [] }];
-
-let newArray = [];
-
-let ingredientsArray = [];
-
-recipes.forEach((recipe) => {
-  recipe.ingredients.forEach((ingredient) => {
-    if (!ingredientsArray.includes(ingredient.ingredient.toLowerCase())) {
-      ingredientsArray.push(ingredient.ingredient.toLowerCase());
-    }
-  });
-});
-
-let appareils = [];
-let ustensiles = recipes.map((recipe) => {
-  return recipe.ustensils;
-});
-let filteredTagArray = [];
-let multipleTagsArray = [];
+// Initialise the array of tags
 
 const searchBar = document.getElementById("search");
+// Get the search bar
 
 const searchBarFilter = () => {
   const tags = document.querySelectorAll(".itemSearched");
-  console.log(searchedArray.length);
-  if (searchBar.value.length > 2 && searchedArray.length == 0) {
+  // Get tags
+  if (searchBar.value.length > 2 && searchedArray.length === 0) {
     menu.innerHTML = "";
-  } else if (searchBar.value.length == 1) {
-    return false;
   } else if (
     searchBar.value.length > 2 &&
-    searchedArray.length > 1 &&
-    finalArray.length > 1
+    searchedArray.length >= 1 &&
+    tags.length > 0
   ) {
-    searchedArray = finalArray.filter(
+    searchedArray = arrayOfTags.filter(
       (el) =>
         el.name.toLowerCase().includes(searchBar.value) ||
         el.description.toLowerCase().includes(searchBar.value)
     );
-    displayContent(searchedArray);
-  } else if (searchBar.value.length > 2 && searchedArray.length > 1) {
+  } else if (
+    searchBar.value.length > 2 &&
+    searchedArray.length >= 1 &&
+    tags.length === 0
+  ) {
     searchedArray = recipes.filter(
       (el) =>
         el.name.toLowerCase().includes(searchBar.value) ||
         el.description.toLowerCase().includes(searchBar.value)
     );
-    displayContent(searchedArray);
-  } else if (searchBar.value.length < 3 && tags.length == 0) {
-    displayContent();
+  } else if (searchBar.value.length < 3 && tags.length === 0) {
     searchedArray = recipes;
-    finalArray = [];
-  } else if (searchBar.value.length == 0 && tags.length > 0) {
-    displayContent(finalArray);
+  } else if (searchBar.value.length < 3 && tags.length > 0) {
+    searchedArray = arrayOfTags;
   }
+
+  displayContent(searchedArray);
+  return searchedArray;
 };
 
-const tagsFilter = (array) => {
-  const tags = document.querySelectorAll(".itemSearched");
-  if (tags.length > 1) {
-    if (array === ing) {
-      for (i = 0; i < array[0].length; i++) {
-        console.log(array[0][i], newArray);
-        newArray = finalArray.filter((recipe) => {
-          return recipe.ingredients.some((r) => {
-            return r.ingredient.toLowerCase().includes(array[0][i]);
-          });
-        });
-      }
-    } else if (array === app) {
-      for (i = 0; i < array[0].length; i++) {
-        newArray = finalArray.filter((recipe) => {
-          return recipe.appliance.toLowerCase().includes(array[0][i]);
-        });
-      }
-    } else if (array === ust) {
-      array.forEach((tag) => {
-        newArray = finalArray.filter((recipe) => {
-          return recipe.ustensils.some((r) => {
-            return r.toLowerCase() == tag;
-          });
-        });
-      });
-    }
-    displayContent(newArray);
-  } else {
-    if (array === ing) {
-      array[0].forEach((tag) => {
-        finalArray = searchedArray.filter((recipe) => {
-          return recipe.ingredients.some((r) => {
-            return r.ingredient.toLowerCase().includes(tag);
-          });
-        });
-      });
-    } else if (array === app) {
-      array[0].forEach((tag) => {
-        finalArray = searchedArray.filter((recipe) => {
-          return recipe.appliance.toLowerCase().includes(tag);
-        });
-      });
-    } else if (array === ust) {
-      array[0].forEach((tag) => {
-        finalArray = searchedArray.filter((recipe) => {
-          return recipe.ustensils.some((r) => {
-            return r.toLowerCase() == tag;
-          });
-        });
-      });
-    }
-    displayContent(finalArray);
-  }
-};
 searchBar.addEventListener("input", searchBarFilter);
+// Listen the search bar
 
-const addTag = (array, name) => {
-  if (array === ing && !array[0].includes(name.toLowerCase())) {
-    addIngredient(name.toLowerCase());
-  } else if (array === app && !array[0].includes(name.toLowerCase())) {
-    addAppliance(name.toLowerCase());
-  } else if (array === ust && !array[0].includes(name.toLowerCase())) {
-    addUstencil(name.toLowerCase());
-  }
-  if (!array[0].includes(name.toLowerCase())) {
-    array[0].push(name.toLowerCase());
-    tagsFilter(array);
+const tagsFilter = (tagArray, searchedArray) => {
+  const tags = document.querySelectorAll(".itemSearched");
+  // Get tags
+  arrayOfTags = searchedArray;
+  // Initialise
+  if (tags.length >= 1) {
+    // If tags
+    if (tagArray === ing) {
+      // If ingredients
+      for (i = 0; i < tagArray[0].length; i++) {
+        arrayOfTags = arrayOfTags.filter((recipe) => {
+          return recipe.ingredients.some((r) => {
+            return r.ingredient.toLowerCase().includes(tagArray[0][i]);
+          });
+        });
+      }
+    } else if (tagArray === app) {
+      // If appareils
+      for (i = 0; i < tagArray[0].length; i++) {
+        arrayOfTags = arrayOfTags.filter((recipe) => {
+          return recipe.appliance.toLowerCase().includes(tagArray[0][i]);
+        });
+      }
+    } else if (tagArray === ust) {
+      // If ustensils
+      for (i = 0; i < tagArray[0].length; i++) {
+        arrayOfTags = arrayOfTags.filter((recipe) => {
+          return recipe.ustensils.includes(tagArray[0][i]);
+        });
+      }
+    }
+    searchedArray = arrayOfTags;
+    // Synchronise
+    return arrayOfTags;
+  } else {
+    return searchedArray;
   }
 };
 
-const removeTag = (key, array) => {
-  const tags = document.querySelectorAll(".itemSearched");
-  if (tags.length === 1 && searchBar.value.length < 1) {
-    array[0].splice(key, 1);
-    finalArray = [];
-    searchedArray = recipes;
-    displayContent();
-  } else if (tags.length === 1 && searchBar.value.length > 2) {
-    array[0].splice(key, 1);
-    finalArray = [];
-    searchedArray = recipes;
-    searchBarFilter();
-    displayContent(searchedArray);
-  } else {
-    array[0].splice(key, 1);
-    tagsFilter(array);
+const addTag = (tagArray, name) => {
+  if (tagArray === ing && !tagArray[0].includes(name.toLowerCase())) {
+    addIngredient(name.toLowerCase());
+    filterIng(name.toLowerCase(), false);
+    displayIngredients();
+  } else if (tagArray === app && !tagArray[0].includes(name.toLowerCase())) {
+    addAppliance(name.toLowerCase());
+    filterApp(name.toLowerCase(), false);
+    displayAppareils();
+  } else if (tagArray === ust && !tagArray[0].includes(name.toLowerCase())) {
+    addUstencil(name.toLowerCase());
+    filterUst(name.toLowerCase(), false);
+    displayUstensils();
+    // Add the tag, then filter for removing the one selected and display the new tags
   }
+  if (!tagArray[0].includes(name.toLowerCase())) {
+    // If the tag not in the array
+    tagArray[0].push(name.toLowerCase());
+    // Push the tag in the array of tags
+    searchedArray = searchBarFilter();
+    // Initialise the array of search
+    tagsFilter(tagArray, searchedArray);
+    // Filter with tags
+    displayContent(arrayOfTags);
+    // Display the result
+  }
+};
+
+const removeTag = (key, tagArray) => {
+  let val = tagArray[0][key];
+  // Get the specified tag
+  tagArray[0].splice(key, 1);
+  // Then remove it from the array
+  if (tagArray[0].length === 0 && searchBar.value.length < 3) {
+    searchedArray = recipes;
+    // If no tags and no search return the recipes
+  }
+  arrayOfTags = tagsFilter(tagArray, searchedArray);
+  displayContent(arrayOfTags);
+  // Display the result of functions
+  if (tagArray === ing) {
+    filterIng(val, true);
+    displayIngredients();
+  }
+  if (tagArray === app) {
+    filterApp(val, true);
+    displayAppareils();
+  }
+  if (tagArray === ust) {
+    filterUst(val, true);
+    displayUstensils();
+  }
+  // Then filter the tags and display new tags without the one selected
 };

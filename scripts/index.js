@@ -1,6 +1,5 @@
 const menu = document.querySelector(".menu");
 
-let finalArray = [];
 const displayContent = (data) => {
   if (!data) {
     menu.innerHTML = recipes
@@ -74,3 +73,5 @@ const displayContent = (data) => {
 };
 
 displayContent("");
+
+// Displaying datas
