@@ -18,21 +18,37 @@ const searchBarFilter = () => {
     searchedArray.length >= 1 &&
     tags.length > 0
   ) {
-    searchedArray = arrayOfTags.filter(
-      (el) =>
-        el.name.toLowerCase().includes(searchBar.value) ||
-        el.description.toLowerCase().includes(searchBar.value)
-    );
+    searchedArray = [];
+    for (el in arrayOfTags) {
+      if (
+        arrayOfTags[el].name
+          .toLowerCase()
+          .includes(searchBar.value.toLowerCase()) ||
+        arrayOfTags[el].description
+          .toLowerCase()
+          .includes(searchBar.value.toLowerCase())
+      ) {
+        searchedArray.push(recipes[el]);
+      }
+    }
   } else if (
     searchBar.value.length > 2 &&
     searchedArray.length >= 1 &&
     tags.length === 0
   ) {
-    searchedArray = recipes.filter(
-      (el) =>
-        el.name.toLowerCase().includes(searchBar.value) ||
-        el.description.toLowerCase().includes(searchBar.value)
-    );
+    searchedArray = [];
+    for (el in recipes) {
+      if (
+        recipes[el].name
+          .toLowerCase()
+          .includes(searchBar.value.toLowerCase()) ||
+        recipes[el].description
+          .toLowerCase()
+          .includes(searchBar.value.toLowerCase())
+      ) {
+        searchedArray.push(recipes[el]);
+      }
+    }
   } else if (searchBar.value.length < 3 && tags.length === 0) {
     searchedArray = recipes;
   } else if (searchBar.value.length < 3 && tags.length > 0) {
@@ -42,6 +58,41 @@ const searchBarFilter = () => {
   displayContent(searchedArray);
   return searchedArray;
 };
+
+// const searchBarFilter = () => {
+//   const tags = document.querySelectorAll(".itemSearched");
+//   // Get tags
+//   if (searchBar.value.length > 2 && searchedArray.length === 0) {
+//     menu.innerHTML = "";
+//   } else if (
+//     searchBar.value.length > 2 &&
+//     searchedArray.length >= 1 &&
+//     tags.length > 0
+//   ) {
+//     searchedArray = arrayOfTags.filter(
+//       (el) =>
+//         el.name.toLowerCase().includes(searchBar.value) ||
+//         el.description.toLowerCase().includes(searchBar.value)
+//     );
+//   } else if (
+//     searchBar.value.length > 2 &&
+//     searchedArray.length >= 1 &&
+//     tags.length === 0
+//   ) {
+//     searchedArray = recipes.filter(
+//       (el) =>
+//         el.name.toLowerCase().includes(searchBar.value) ||
+//         el.description.toLowerCase().includes(searchBar.value)
+//     );
+//   } else if (searchBar.value.length < 3 && tags.length === 0) {
+//     searchedArray = recipes;
+//   } else if (searchBar.value.length < 3 && tags.length > 0) {
+//     searchedArray = arrayOfTags;
+//   }
+
+//   displayContent(searchedArray);
+//   return searchedArray;
+// };
 
 searchBar.addEventListener("input", searchBarFilter);
 // Listen the search bar
