@@ -144,7 +144,7 @@ header {
   border-radius: 5px;
   height: 360px;
   max-height: 360px;
-  height: 100%;
+  min-height: 360px;
 }
 
 .image {
@@ -160,6 +160,7 @@ header {
   padding: 20px;
   background-color: #e7e7e7;
   height: 100%;
+  max-height: 180px;
 }
 
 .titleTime {
@@ -252,4 +253,22 @@ header {
   outline: none;
   text-transform: capitalize;
   text-overflow: ellipsis;
+}
+
+/* Medias*/
+
+@media screen and (max-width: 768px) {
+  .menu {
+    grid-template-columns: 1fr;
+  }
+  .searchItems {
+    flex-direction: column;
+  }
+  .show {
+    grid-template-columns: 1fr 1fr;
+    z-index: 3;
+  }
+  .ingredientInput {
+    font-size: 13px;
+  }
 }

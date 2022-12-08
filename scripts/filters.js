@@ -18,21 +18,27 @@ const searchBarFilter = () => {
     searchedArray.length >= 1 &&
     tags.length > 0
   ) {
-    searchedArray = arrayOfTags.filter(
-      (el) =>
-        el.name.toLowerCase().includes(searchBar.value) ||
-        el.description.toLowerCase().includes(searchBar.value)
-    );
+    searchedArray = arrayOfTags.filter((el) => {
+      return el.ingredients.some(
+        (e) =>
+          e.ingredient.toLowerCase().includes(searchBar.value.toLowerCase()) ||
+          el.name.toLowerCase().includes(searchBar.value.toLowerCase()) ||
+          el.description.toLowerCase().includes(searchBar.value.toLowerCase())
+      );
+    });
   } else if (
     searchBar.value.length > 2 &&
     searchedArray.length >= 1 &&
     tags.length === 0
   ) {
-    searchedArray = recipes.filter(
-      (el) =>
-        el.name.toLowerCase().includes(searchBar.value) ||
-        el.description.toLowerCase().includes(searchBar.value)
-    );
+    searchedArray = recipes.filter((el) => {
+      return el.ingredients.some(
+        (e) =>
+          e.ingredient.toLowerCase().includes(searchBar.value.toLowerCase()) ||
+          el.name.toLowerCase().includes(searchBar.value.toLowerCase()) ||
+          el.description.toLowerCase().includes(searchBar.value.toLowerCase())
+      );
+    });
   } else if (searchBar.value.length < 3 && tags.length === 0) {
     searchedArray = recipes;
   } else if (searchBar.value.length < 3 && tags.length > 0) {
