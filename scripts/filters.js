@@ -28,7 +28,9 @@ const searchBarFilter = () => {
           .toLowerCase()
           .includes(searchBar.value.toLowerCase())
       ) {
-        searchedArray.push(recipes[el]);
+        if (!searchedArray.includes(recipes[el])) {
+          searchedArray.push(recipes[el]);
+        }
       }
     }
   } else if (
@@ -50,7 +52,9 @@ const searchBarFilter = () => {
             .toLowerCase()
             .includes(searchBar.value.toLowerCase())
         ) {
-          searchedArray.push(recipes[el]);
+          if (!searchedArray.includes(recipes[el])) {
+            searchedArray.push(recipes[el]);
+          }
         }
       }
     }

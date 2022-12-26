@@ -144,7 +144,7 @@ header {
   border-radius: 5px;
   height: 360px;
   max-height: 360px;
-  height: 100%;
+  min-height: 360px;
 }
 
 .image {
@@ -252,4 +252,20 @@ header {
   outline: none;
   text-transform: capitalize;
   text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 768px) {
+  .menu {
+    grid-template-columns: 1fr;
+  }
+  .searchItems {
+    flex-direction: column;
+  }
+  .show {
+    grid-template-columns: 1fr 1fr;
+    z-index: 3;
+  }
+  .ingredientInput {
+    font-size: 13px;
+  }
 }
