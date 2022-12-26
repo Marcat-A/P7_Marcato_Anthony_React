@@ -24,8 +24,9 @@ const ing = taggedArray.map((ingredient) => {
 const div = document.querySelector(".dropdownIngredients");
 // Dropdown
 
-const initIng = () => {
-  recipes.forEach((recipe) => {
+const initIng = (array) => {
+  ingredientsArray = [];
+  array.forEach((recipe) => {
     recipe.ingredients.forEach((ingredient) => {
       if (!ingredientsArray.includes(ingredient.ingredient.toLowerCase())) {
         ingredientsArray.push(ingredient.ingredient.toLowerCase());
@@ -33,12 +34,12 @@ const initIng = () => {
     });
   });
 };
-initIng();
+initIng(recipes);
 // Init the tags
 
 const filterIng = (name, closed) => {
   if (closed) {
-    ingredientsArray.push(name);
+    // ingredientsArray.push(name);
   } else {
     for (let i = 0; i < ingredientsArray.length; i++) {
       if (ingredientsArray[i] === name) {

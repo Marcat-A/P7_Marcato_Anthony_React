@@ -16,8 +16,9 @@ function displayDropdown3() {
 }
 // Dropdown function
 
-const initUst = () => {
-  recipes.forEach((recipe) => {
+const initUst = (array) => {
+  ustensilsArray = [];
+  array.forEach((recipe) => {
     recipe.ustensils.forEach((ustensil) => {
       if (!ustensilsArray.includes(ustensil.toLowerCase())) {
         ustensilsArray.push(ustensil.toLowerCase());
@@ -25,12 +26,12 @@ const initUst = () => {
     });
   });
 };
-initUst();
+initUst(recipes);
 // Init the ustensils
 
 const filterUst = (name, closed) => {
   if (closed) {
-    ustensilsArray.push(name);
+    // ustensilsArray.push(name);
   } else {
     for (let i = 0; i < ustensilsArray.length; i++) {
       if (ustensilsArray[i] === name) {

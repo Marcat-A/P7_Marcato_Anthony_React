@@ -254,6 +254,13 @@ header {
   text-overflow: ellipsis;
 }
 
+.noRecipe {
+  display: flex;
+  text-align: center;
+  margin-top: 4rem;
+  font-size: 1.2rem;
+}
+
 @media screen and (max-width: 768px) {
   .menu {
     grid-template-columns: 1fr;

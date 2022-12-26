@@ -35,6 +35,9 @@ const displayContent = (data) => {
   </div>`;
       })
       .join("");
+  } else if (data.length === 0) {
+    menu.innerHTML =
+      "<div></div><div class='noRecipe'>Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</div><div></div>";
   } else {
     menu.innerHTML = data
       .map((recipe) => {

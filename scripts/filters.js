@@ -11,8 +11,9 @@ const searchBar = document.getElementById("search");
 const searchBarFilter = () => {
   const tags = document.querySelectorAll(".itemSearched");
   // Get tags
-  if (searchBar.value.length > 2 && searchedArray.length === 0) {
-    menu.innerHTML = "";
+  if (searchBar.value.length > 2 && searchedArray.length == 0) {
+    menu.innerHTML =
+      "Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.";
   } else if (
     searchBar.value.length > 2 &&
     searchedArray.length >= 1 &&
@@ -20,16 +21,21 @@ const searchBarFilter = () => {
   ) {
     searchedArray = [];
     for (el in arrayOfTags) {
-      if (
-        arrayOfTags[el].name
-          .toLowerCase()
-          .includes(searchBar.value.toLowerCase()) ||
-        arrayOfTags[el].description
-          .toLowerCase()
-          .includes(searchBar.value.toLowerCase())
-      ) {
-        if (!searchedArray.includes(recipes[el])) {
-          searchedArray.push(recipes[el]);
+      for (e in arrayOfTags[el].ingredients) {
+        if (
+          arrayOfTags[el].name
+            .toLowerCase()
+            .includes(searchBar.value.toLowerCase()) ||
+          arrayOfTags[el].description
+            .toLowerCase()
+            .includes(searchBar.value.toLowerCase()) ||
+          arrayOfTags[el].ingredients[e].ingredient
+            .toLowerCase()
+            .includes(searchBar.value.toLowerCase())
+        ) {
+          if (!searchedArray.includes(arrayOfTags[el])) {
+            searchedArray.push(arrayOfTags[el]);
+          }
         }
       }
     }
@@ -60,11 +66,31 @@ const searchBarFilter = () => {
     }
   } else if (searchBar.value.length < 3 && tags.length === 0) {
     searchedArray = recipes;
+    initIng(searchedArray);
+    displayIngredients();
+    initAppareils(searchedArray);
+    displayAppareils();
+    initUst(searchedArray);
+    displayUstensils();
   } else if (searchBar.value.length < 3 && tags.length > 0) {
     searchedArray = arrayOfTags;
+
+    initIng(arrayOfTags);
+    displayIngredients();
+    initAppareils(arrayOfTags);
+    displayAppareils();
+    initUst(arrayOfTags);
+    displayUstensils();
   }
 
   displayContent(searchedArray);
+
+  initIng(searchedArray);
+  displayIngredients();
+  initAppareils(searchedArray);
+  displayAppareils();
+  initUst(searchedArray);
+  displayUstensils();
   return searchedArray;
 };
 
@@ -104,8 +130,21 @@ const tagsFilter = (tagArray, searchedArray) => {
     }
     searchedArray = arrayOfTags;
     // Synchronise
+
+    initIng(arrayOfTags);
+    displayIngredients();
+    initAppareils(arrayOfTags);
+    displayAppareils();
+    initUst(arrayOfTags);
+    displayUstensils();
     return arrayOfTags;
   } else {
+    initIng(searchedArray);
+    displayIngredients();
+    initAppareils(searchedArray);
+    displayAppareils();
+    initUst(searchedArray);
+    displayUstensils();
     return searchedArray;
   }
 };
@@ -113,16 +152,10 @@ const tagsFilter = (tagArray, searchedArray) => {
 const addTag = (tagArray, name) => {
   if (tagArray === ing && !tagArray[0].includes(name.toLowerCase())) {
     addIngredient(name.toLowerCase());
-    filterIng(name.toLowerCase(), false);
-    displayIngredients();
   } else if (tagArray === app && !tagArray[0].includes(name.toLowerCase())) {
     addAppliance(name.toLowerCase());
-    filterApp(name.toLowerCase(), false);
-    displayAppareils();
   } else if (tagArray === ust && !tagArray[0].includes(name.toLowerCase())) {
     addUstencil(name.toLowerCase());
-    filterUst(name.toLowerCase(), false);
-    displayUstensils();
     // Add the tag, then filter for removing the one selected and display the new tags
   }
   if (!tagArray[0].includes(name.toLowerCase())) {
@@ -135,6 +168,17 @@ const addTag = (tagArray, name) => {
     // Filter with tags
     displayContent(arrayOfTags);
     // Display the result
+  }
+  if (tagArray === ing) {
+    filterIng(name.toLowerCase(), false);
+    displayIngredients();
+  } else if (tagArray === app) {
+    filterApp(name.toLowerCase(), false);
+    displayAppareils();
+  } else if (tagArray === ust) {
+    filterUst(name.toLowerCase(), false);
+    displayUstensils();
+    // Add the tag, then filter for removing the one selected and display the new tags
   }
 };
 

@@ -30,8 +30,9 @@ const filterApp = (name, closed) => {
 };
 // Filtered the appareils
 
-const initAppareils = () => {
-  recipes.forEach((recipe) => {
+const initAppareils = (array) => {
+  appareilsArray = [];
+  array.forEach((recipe) => {
     if (!appareilsArray.includes(recipe.appliance.toLowerCase())) {
       appareilsArray.push(recipe.appliance.toLowerCase());
     }
@@ -39,7 +40,7 @@ const initAppareils = () => {
 };
 // Init
 
-initAppareils();
+initAppareils(recipes);
 
 const app = taggedArray.map((appareils) => {
   return appareils.appareils;
